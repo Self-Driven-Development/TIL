@@ -4,10 +4,9 @@
 
 ## 작성 규칙
 
-작성 규칙은 따로 없습니다!    
+작성 규칙은 따로 없습니다!
 
 매일 **꾸준히** 작성하는 것이 목표입니다.
-
 
 ## 참여자
 
@@ -33,6 +32,9 @@
         <img src="https://avatars.githubusercontent.com/u/97885933?v=4" alt="민세림" />
       </a>
     </td>
+    <td align="center" width="150px">
+      <a href="https://github.com/guesung" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/62178788?v=4" alt="박규성" />
   </tr>
   <tr>
    <td align="center">
@@ -53,6 +55,11 @@
     <td align="center">
       <a href="https://github.com/anonymousRecords" target="_blank">
         민세림
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/guesung" target="_blank">
+        박규성
       </a>
     </td>
   </tr>
