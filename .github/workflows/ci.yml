@@ -13,18 +13,19 @@ jobs:
       # used in the specific "build.sh"
     steps:
       - uses: actions/checkout@v2
-      # - name: creates output
-      #   run:
-      #     sh ./build.sh # some command from your repository that creates
-      #     # output to "source-directory" ("output" in the example)
+      - name: creates output
+        run:
+          sh ./build.sh # some command from your repository that creates
+          # output to "source-directory" ("output" in the example)
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN }}
         with:
-          source-directory: 'test/'
+          source-directory: 'output/'
           destination-github-username: 'self-driven-development'
           destination-repository-name: 'Dogsounds-TIL'
           user-email: kangju2000@naver.com
-          target-branch: main
+          target-branch: test
+          target-directory: docs/
           commit-message: 'test commit'
