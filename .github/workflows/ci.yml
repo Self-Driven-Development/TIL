@@ -22,7 +22,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN }}
         with:
-          source-directory: 'README.md'
+          source-directory: 'test/'
           destination-github-username: 'self-driven-development'
           destination-repository-name: 'Dogsounds-TIL'
           user-email: kangju2000@naver.com
