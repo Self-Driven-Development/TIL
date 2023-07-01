@@ -41,14 +41,12 @@
 
 - Server-driven UI : DSL(Domain Specific Language) + DSL을 렌더링하는 프론트엔드 엔진
 
-<img src='https://github.com/guesung/guesung/assets/62178788/8846993a-5c2b-49f4-b20c-62dd38445318' width=600>
+<img src='https://github.com/guesung/guesung/assets/62178788/8846993a-5c2b-49f4-b20c-62dd38445318' width="600" />
 
 ### Server-driven UI의 구현
 
 ```js
-type ServerDirvenUI = (
-  dsl: DSL
-) => (props: { data: unknown }) => React.ReactNode;
+type ServerDirvenUI = (dsl: DSL) => (props: { data: unknown }) => React.ReactNode;
 ```
 
 - UI DSL을 입력받고, 새로운 함수를 반환

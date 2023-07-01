@@ -26,6 +26,6 @@ jobs:
           destination-github-username: 'self-driven-development'
           destination-repository-name: 'Dogsounds-TIL'
           user-email: kangju2000@naver.com
-          target-branch: test
+          target-branch: main
           target-directory: docs/
-          commit-message: 'test commit'
+          commit-message: ${{ github.event.commits[0].message }}
