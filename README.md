@@ -35,6 +35,8 @@
     <td align="center" width="150px">
       <a href="https://github.com/guesung" target="_blank">
         <img src="https://avatars.githubusercontent.com/u/62178788?v=4" alt="박규성" />
+      </a>
+    </td>
   </tr>
   <tr>
    <td align="center">
@@ -63,4 +65,4 @@
       </a>
     </td>
   </tr>
-<table>
+</table>
