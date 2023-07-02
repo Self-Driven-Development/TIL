@@ -7,16 +7,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      pandoc/latex # "ubuntu" is a more generic container
-      # using "pandoc/latex" because of dependencies
-      # used in the specific "build.sh"
+    container: pandoc/latex
     steps:
       - uses: actions/checkout@v2
       - name: creates output
-        run:
-          sh ./build.sh # some command from your repository that creates
-          # output to "source-directory" ("output" in the example)
+        run: sh ./build.sh
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
         env:
@@ -25,7 +20,8 @@ jobs:
           source-directory: 'output/'
           destination-github-username: 'self-driven-development'
           destination-repository-name: 'Dogsounds-TIL'
-          user-email: kangju2000@naver.com
+          user-name: github-actions[bot]
+          user-email: 41898282+github-actions[bot]@users.noreply.github.com
           target-branch: main
           target-directory: docs/
-          commit-message: ${{ github.event.commits[0].message }}
+          commit-message: 'Update TIL'
