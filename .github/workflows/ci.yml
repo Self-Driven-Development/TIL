@@ -2,7 +2,7 @@ name: CI
 
 on:
   schedule:
-    - cron: '0 0 5 * *'
+    - cron: '0 0/2 * * *'
 
 jobs:
   build:
@@ -20,7 +20,8 @@ jobs:
           source-directory: 'output/'
           destination-github-username: 'self-driven-development'
           destination-repository-name: 'Dogsounds-TIL'
-          user-email: kangju2000@naver.com
+          user-name: github-actions[bot]
+          user-email: 41898282+github-actions[bot]@users.noreply.github.com
           target-branch: main
           target-directory: docs/
           commit-message: 'Update TIL'
