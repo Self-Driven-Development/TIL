@@ -25,7 +25,8 @@ const navigate=useNavigate();
 ```
 2. navigate 사용하기   
 click이 발생하면 navigate이 발생하게 한다.
-<br><br/>
+
+<br></br>
 
 상황에 따라 무엇을 사용할지 판단하면 될 거 같다.
 ### overflow
@@ -80,6 +81,7 @@ export default function MemoModal({ onClose, isOpen, onDelete,title }) {
 }
 ```
 background를 누르면 닫아지는기능도 구현해볼 생각이다.
-<br><br/>
+
+<br></br>
 
 modal을 구현하는 과정에서 modal_background에는 `opacity:0.9`를 적용, modal에는 `opacity:1`을 적용하고 싶었다. 부모의 0.9가 자식에게 영향을 미쳐 최댓값이 0.9로 설정되었다. 해결책은 rgba(a,a,a,opacity) 였다.
