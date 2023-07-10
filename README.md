@@ -1,15 +1,14 @@
-# TIL(Today I Learned)
+# Dogsounds TIL(Today I Learned)
 
-> 매일 공부한 내용을 **`다같이`** 정리하는 레포지토리
+> 매일 공부한 내용을 정리해요
 
 ## 작성 규칙
 
-자세한 내용은 [가이드라인](https://github.com/Self-Driven-Development/TIL/blob/main/GUIDELINE.md)을 참조하세요.
+작성 규칙은 따로 없습니다!
 
-## 작성 목적
+매일 **꾸준히** 작성하는 것이 목표입니다.
 
-- 공부한 내용을 정리하는 습관을 기를 수 있어요
-- 공부한 내용을 다른 사람과 공유할 수 있어요
+
 
 ## 참여자
 
@@ -68,4 +67,4 @@
       </a>
     </td>
   </tr>
-</table>
+<table>

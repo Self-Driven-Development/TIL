@@ -15,7 +15,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[2.2. Node.js 설치](#22-nodejs-설치)  
 &nbsp;&nbsp;&nbsp;&nbsp;[2.3. pnpm 설치](#23-pnpm-설치)  
 &nbsp;&nbsp;&nbsp;&nbsp;[2.4. 실행](#24-실행)  
-&nbsp;&nbsp;&nbsp;&nbsp;[2.5. 빌드](#25-빌드)  
+&nbsp;&nbsp;&nbsp;&nbsp;[2.5. 빌드](#25-빌드)
 
 ## 1. TIL 작성 규칙
 
@@ -117,35 +117,36 @@ sidebar_position: 사이드바에 표시될 문서 위치
 
 직접 로컬에서 실행하고 싶다면 아래 방법을 따라주세요.
 
-#### 2.1. Dogsounds-TIL 레포지토리 클론
+#### 2.1. TIL 레포지토리 클론
 
 ```bash
-git clone https://github.com/Self-Driven-Development/Dogsounds-TIL
+git clone https://github.com/Self-Driven-Development/TIL
 
-cd Dogsounds-TIL
+cd TIL
 ```
+
+이 때 `vscode`의 우측 하단에 익스텐션을 설치하라는 메시지가 뜨면 설치해주세요.
 
 #### 2.2. Node.js 설치
 
 - [Node.js](https://nodejs.org/ko/) 설치 (LTS 버전 권장)
 
-#### 2.3. pnpm 설치
+#### 2.3. yarn 설치
 
 ```bash
-npm install -g pnpm
+npm install -g yarn
 ```
 
 #### 2.4. 실행
 
 ```bash
-pnpm install
-pnpm start
+yarn start
 ```
 
 #### 2.5. 빌드
 
 ```bash
-pnpm run build
+yarn build
 ```
 
 빌드 시 에러가 발생한다면 [작성 규칙](#1-til-작성-규칙)을 확인해서 수정해주세요.
