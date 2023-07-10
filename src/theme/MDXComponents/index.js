@@ -9,7 +9,7 @@ import MDXUl from '@theme/MDXComponents/Ul';
 import MDXImg from '@theme/MDXComponents/Img';
 import Admonition from '@theme/Admonition';
 import Mermaid from '@theme/Mermaid';
-import YouTube from '@site/src/components/Youtube';
+import Youtube from '@site/src/components/Youtube';
 
 const MDXComponents = {
   head: MDXHead,
@@ -27,6 +27,6 @@ const MDXComponents = {
   h6: props => <MDXHeading as="h6" {...props} />,
   admonition: Admonition,
   mermaid: Mermaid,
-  YouTube,
+  Youtube,
 };
 export default MDXComponents;
