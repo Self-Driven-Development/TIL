@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
+                       xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+  <ShortName>Dogsounds-TIL</ShortName>
+  <Description>Search Dogsounds-TIL</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Image width="16" height="16" type="image/x-icon">https://self-driven-development.github.io/Dogsounds-TIL/https://avatars.githubusercontent.com/u/132475839?s=200&amp;v=4</Image>
+  <Url type="text/html" method="get" template="https://self-driven-development.github.io/Dogsounds-TIL/search?q={searchTerms}"/>
+  <Url type="application/opensearchdescription+xml" rel="self" template="https://self-driven-development.github.io/Dogsounds-TIL/opensearch.xml" />
+  <moz:SearchForm>https://self-driven-development.github.io/Dogsounds-TIL/</moz:SearchForm>
+</OpenSearchDescription>
