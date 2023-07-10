@@ -44,5 +44,18 @@
   - 이는 대규모 애플리케이션의 경우 성능 문제가 발생할 수 있습니다.
 -  ES Module의 import는 비동기적으로 모듈을 불러옵니다.
 
+### 등등 CJS와 ESM의 차이
+1. ESM은 CJS의 named exports를 import 할 수 없다.
+```js
+import _ from './lodash.cjs'
+```
+- 이것은 불가능하다.
+```js
+import { shuffle } from './lodash.cjs'
+```
+- 이것은 가능하다.
+2. 기본값은 CJS. ESM모드를 사용하기 위해서는 package.json에 `"type": "module"`을 추가하는 등 설정이 필요
+
+
 # Reference
 - [CommonJS](https://d2.naver.com/helloworld/12864)
