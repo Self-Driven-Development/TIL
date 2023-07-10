@@ -6,13 +6,13 @@ const katex = require('rehype-katex');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Dogsounds-TIL',
+  title: 'TIL',
   tagline: 'Today I Learned',
   favicon: 'https://avatars.githubusercontent.com/u/132475839?s=200&v=4',
   url: 'https://self-driven-development.github.io',
-  baseUrl: '/Dogsounds-TIL/',
+  baseUrl: '/TIL/',
   organizationName: 'Self-Driven-Development',
-  projectName: 'Dogsounds-TIL',
+  projectName: 'TIL',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
@@ -37,8 +37,8 @@ const config = {
         },
         docs: {
           path: 'docs',
+          routeBasePath: '/members',
           sidebarPath: require.resolve('./sidebars.js'),
-          routeBasePath: '/TIL',
           include: ['**/*.md', '**/*.mdx'],
           exclude: ['**/_*.{js,jsx,ts,tsx,md,mdx}'],
           remarkPlugins: [math],
@@ -79,44 +79,44 @@ const config = {
       ],
       image: 'https://avatars.githubusercontent.com/u/132475839?s=200&v=4',
       navbar: {
-        title: 'Dogsounds-TIL',
+        title: 'TIL',
         logo: {
-          alt: 'Dogsounds-TIL Logo',
+          alt: 'TIL Logo',
           src: 'https://avatars.githubusercontent.com/u/132475839?s=200&v=4',
         },
         items: [
           {
-            to: '/TIL/',
+            to: '/members/',
             label: '개요',
             position: 'left',
           },
           {
-            to: '/TIL/강주혁',
+            to: '/members/강주혁',
             label: '강주혁',
             position: 'left',
           },
           {
-            to: '/TIL/이학림',
+            to: '/members/이학림',
             label: '이학림',
             position: 'left',
           },
           {
-            to: '/TIL/송은수',
+            to: '/members/송은수',
             label: '송은수',
             position: 'left',
           },
           {
-            to: '/TIL/민세림',
+            to: '/members/민세림',
             label: '민세림',
             position: 'left',
           },
           {
-            to: '/TIL/박규성',
+            to: '/members/박규성',
             label: '박규성',
             position: 'left',
           },
           {
-            href: 'https://github.com/Self-Driven-Development/Dogsounds-TIL',
+            href: 'https://github.com/Self-Driven-Development/TIL',
             'aria-label': 'GitHub',
             position: 'right',
             className: 'navbar-github-link',
@@ -131,7 +131,7 @@ const config = {
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/Self-Driven-Development/Dogsounds-TIL',
+                href: 'https://github.com/Self-Driven-Development/TIL',
               },
             ],
           },

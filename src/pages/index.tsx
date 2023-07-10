@@ -13,7 +13,7 @@ function HomepageHeader() {
       <div className="container">
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <Link to="/TIL" className="button button--primary button--lg">
+        <Link to="/members" className="button button--primary button--lg">
           보러 가기
         </Link>
       </div>
