@@ -4,7 +4,7 @@
 
 ## 작성 규칙
 
-자세한 내용은 [가이드라인](https://github.com/Self-Driven-Development/TIL/tree/main/docs/GUIDELINE.md)을 참조하세요.
+자세한 내용은 [가이드라인](https://github.com/Self-Driven-Development/TIL/tree/main/GUIDELINE.md)을 참조하세요.
 
 ## 작성 목적
 

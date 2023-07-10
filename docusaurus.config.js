@@ -36,7 +36,7 @@ const config = {
           anonymizeIP: true,
         },
         docs: {
-          path: 'docs',
+          path: 'members',
           routeBasePath: '/members',
           sidebarPath: require.resolve('./sidebars.js'),
           include: ['**/*.md', '**/*.mdx'],
