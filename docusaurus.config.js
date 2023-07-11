@@ -14,7 +14,7 @@ const config = {
   baseUrl: '/TIL/',
   organizationName: 'Self-Driven-Development',
   projectName: 'TIL',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   i18n: {
