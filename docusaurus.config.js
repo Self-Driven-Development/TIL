@@ -9,6 +9,7 @@ const config = {
   title: 'TIL',
   tagline: 'Today I Learned',
   favicon: 'https://avatars.githubusercontent.com/u/132475839?s=200&v=4',
+  trailingSlash: false,
   url: 'https://self-driven-development.github.io',
   baseUrl: '/TIL/',
   organizationName: 'Self-Driven-Development',
