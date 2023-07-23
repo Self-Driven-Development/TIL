@@ -9,6 +9,7 @@
 5. 무한 스크롤 (`Infinite Queries`)
 6. 비동기 과정을 선언적으로 관리할 수 있다.
 7. react hook과 사용하는 구조가 비슷하다.
+8. Client 데이터와 Server 데이터를 분리
 
 ### useQuery
 - 데이터를 get하기 위한 api
@@ -70,8 +71,6 @@ const queryClient = new QueryClient({
 });
 
 ```
-
-
 
 ### useMutation
 - 데이터를 post, update하기 위한 api
@@ -145,5 +144,104 @@ return (
 );
 
 ```
+
+## 캐싱
+- 캐싱 : 특정 데이터의 복사본을 저장하여 이후 동일한 데이터의 재접근 속도를 높이는 것
+  - fresh한 데이터 : 최신의 데이터
+  - 기존의 데이터 : stale한 데이터
+- 데이터 갱신하는 타이밍
+  1. 화면을 보고 있을 때
+  2. 페이지의 전환이 일어났을 때
+  3. 페이지 전환없이 이벤트가 발생해 데이터를 요청할 떄
+  - 아래의 옵션 제공
+  ```js
+  refetchOnWindowFocus, //default: true. 브라우저에 포커스가 들어온 경우
+  refetchOnMount, //default: true. 새로운 컴포넌트 마운트가 발생한 경우(
+  refetchOnReconnect, //default: true. 네트워크 재연결이 발생한 경우
+  staleTime, //default: 0. 데이터가 fresh → stale 상태로 변경되는 데 걸리는 시간
+  cacheTime, //default: 5분 (60 * 5 * 1000). 
+  // 데이터가 inactive(비활성)한 상태일 때 캐싱된 상태로 남아있는 시간
+  ```
+### staleTime
+- 데이터가 fresh → stale 상태로 변경되는 데 걸리는 시간
+  - fresh 상태일 때 refetch 트리거(위 3가지)가 발생해도 refetch가 일어나지 않음
+  - 기본값이 0이므로 따로 설정해주지 않으면 refetch가 일어났을 때 무조건 refetch 발생
+
+### cacheTime
+- 데이터가 inactive한 상태일 때 캐싱된 상태로 남아있는 시간
+  - 특정 컴포넌트가 umount(페이지 전환 등으로 화면에서 사라질 떄)되면 사용된 데이터는 inactive상태로 변환 > 데이터는 cacheTime만큼 유지
+  - cacheTime 이후 데이터는 가비지 컬렉터로 수집되어 메모리에서 해제됨
+  - 만약 cacheTime이 지나지 않았는데 해당 데이터를 사용하는 컴포넌트가 다시 mount되면, 새로운 데이터는 fetch해오는 동안 캐싱된 데이터를 보여줌
+  - 즉, 캐싱된 데이터는 계속 보여주는 게 아니라 fetch하는 동안 임시로 보여줌
+
+### React Query가 SWR보다 좋은 점
+1. Devtools : 데이터 흐름을 파악할 수 있음. SWR은 서드 파티 라이브러리를 이용해야 함
+2. 무한 스크롤 구현
+   1. `getPreviousPageParam`, `fetchPreviousPage`, `hasPreviousPage`와 같은 다양한 페이지 관련 기능 존재
+3. `select`를 사용해 raw data로부터 원하는 데이터 추출하여 반환할 수 있음
+4. data optimization
+5. garbage Collection : 캐싱된 데이터가 메모리에서 해제되는 시점을 정할 수 있음
+
+### React Query v4에서의 변경점
+1. 라이브러리명이 기존 `react-query`에서 `@tanstack/react-query`로 변경
+2. Query key에 입력값이 하나여도 무조건 배열로 넣어야 함
+3. useQueries에 여러 쿼리를 넘길 떄 queries를 key값으로 설정
+4. query가 잘못된 경우 `undefined`를 반환하지 않고 error처리
+
+## Query Key
+- query cache는 Key가 직렬화되어 있고, Key는 해쉬되어 관리된다.
+
+```js
+useQuery(['todos', { status, page }], ...)
+useQuery(['todos', { page, status }], ...)
+useQuery(['todos', { page, status, other: undefined }], ...)
+```
+- 위 쿼리는 Key가 모두 같으므로 같은 쿼리로 취급한다.
+- Key는 쿼리에 대해 unique해야 한다.
+- React Query는 cache에 Key를 이용해서 접근한다.
+
+### 객체로 Key 관리
+```js
+const todoKeys = {
+  all: ['todos'] as const,
+  lists: () => [...todoKeys.all, 'list'] as const,
+  list: (filters: string) => [...todoKeys.lists(), { filters }] as const,
+  details: () => [...todoKeys.all, 'detail'] as const,
+  detail: (id: number) => [...todoKeys.details(), id] as const,
+}
+// 🕺 모든 todos 삭제
+queryClient.removeQueries(todoKeys.all)
+
+// 🚀 모든 리스트 invalidate
+queryClient.invalidateQueries(todoKeys.lists())
+
+// 🙌 prefetch 하나의 todo
+queryClient.prefetchQueries(todoKeys.detail(id), () => fetchTodo(id))
+```
+- 권장하는 방식
+- 유지보수에 용이
+
+
+
+### `invalidateQueries`
+- 캐시된 데이터를 무효화하는 함수
+  - 해당 데이터가 즉각 stale 상태가 되어 refetching한다.
+  ```js
+  const queryClient = useQueryClient();
+  const {mutateAsync} = useMutation(postLogout,{
+    onSuccess: () => queryClient.invalidateQueries(["todos"]);
+  })
+  
+  ```
+### `setQueryData`
+- 쿼리 데이터를 수동으로 설정
+  ```js
+  const queryClient = useQueryClient();
+  queryClient.setQueryData(['todos', 'list', { filters }], (previous) =>
+    previous.map((todo) => (todo.id === newTodo.id ? newtodo : todo))
+  )
+  ```
+
+
 
 - [참고](https://kyounghwan01.github.io/blog/React/react-query/basic/#react-suspense%E1%84%8B%E1%85%AA-react-query-%E1%84%89%E1%85%A1%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%92%E1%85%A1%E1%84%80%E1%85%B5)
