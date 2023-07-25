@@ -14,6 +14,13 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+      - name: Generate ENV file
+        run: |
+          echo ANALYTICS_CREDENTIALS=${{ secrets.ANALYTICS_CREDENTIALS }} >> .env
+          echo ANALYTICS_PROPERTY_ID=${{ secrets.ANALYTICS_PROPERTY_ID }} >> .env
+        env:
+          ANALYTICS_CREDENTIALS: ${{ secrets.ANALYTICS_CREDENTIALS }}
+          ANALYTICS_PROPERTY_ID: ${{ secrets.ANALYTICS_PROPERTY_ID }}
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
