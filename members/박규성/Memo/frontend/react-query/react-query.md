@@ -162,14 +162,14 @@ return (
   cacheTime, //default: 5분 (60 * 5 * 1000). 
   // 데이터가 inactive(비활성)한 상태일 때 캐싱된 상태로 남아있는 시간
   ```
-### staleTime
+### staleTime (stle = 썩은)
 - 데이터가 fresh → stale 상태로 변경되는 데 걸리는 시간
   - fresh 상태일 때 refetch 트리거(위 3가지)가 발생해도 refetch가 일어나지 않음
   - 기본값이 0이므로 따로 설정해주지 않으면 refetch가 일어났을 때 무조건 refetch 발생
 
-### cacheTime
+### cacheTime 
 - 데이터가 inactive한 상태일 때 캐싱된 상태로 남아있는 시간
-  - 특정 컴포넌트가 umount(페이지 전환 등으로 화면에서 사라질 떄)되면 사용된 데이터는 inactive상태로 변환 > 데이터는 cacheTime만큼 유지
+  - 특정 컴포넌트가 unmount(페이지 전환 등으로 화면에서 사라질 떄)되면 사용된 데이터는 inactive상태로 변환 > 데이터는 cacheTime만큼 유지
   - cacheTime 이후 데이터는 가비지 컬렉터로 수집되어 메모리에서 해제됨
   - 만약 cacheTime이 지나지 않았는데 해당 데이터를 사용하는 컴포넌트가 다시 mount되면, 새로운 데이터는 fetch해오는 동안 캐싱된 데이터를 보여줌
   - 즉, 캐싱된 데이터는 계속 보여주는 게 아니라 fetch하는 동안 임시로 보여줌
@@ -241,6 +241,21 @@ queryClient.prefetchQueries(todoKeys.detail(id), () => fetchTodo(id))
     previous.map((todo) => (todo.id === newTodo.id ? newtodo : todo))
   )
   ```
+
+### `cancelQueries`
+- 쿼리를 취소하는 함수
+  ```js
+  const queryClient = useQueryClient();
+  const {mutateAsync} = useMutation(postLogout,{
+    onSuccess: () => queryClient.cancelQueries(["todos"]);
+  })
+  ```
+
+### Mutate vs MutateAsync
+- `mutate` : 아무것도 반환 X
+- `mutateAsync` : 돌연변이 결과를 포함한 Promise 반환
+  - 이를 사용할 경우 `Promise`를 직접 제어할 수 있어서 오류를 직접 처리해야 함
+  - 비추
 
 
 
