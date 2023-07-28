@@ -60,7 +60,7 @@ const config = {
             return sidebarItems;
           },
           editUrl: ({ docPath }) =>
-            `https://github.com/Self-Driven-Development/TIL/tree/main/${docPath}`,
+            `https://github.com/Self-Driven-Development/TIL/tree/main/members/${docPath}`,
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
