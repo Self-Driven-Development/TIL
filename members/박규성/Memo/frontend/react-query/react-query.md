@@ -174,6 +174,10 @@ return (
   - 만약 cacheTime이 지나지 않았는데 해당 데이터를 사용하는 컴포넌트가 다시 mount되면, 새로운 데이터는 fetch해오는 동안 캐싱된 데이터를 보여줌
   - 즉, 캐싱된 데이터는 계속 보여주는 게 아니라 fetch하는 동안 임시로 보여줌
 
+### prefetching
+- 새로운 데이터를 받기 전에 사용자가 캐싱된 데이터를 볼 수 있어 `UX에 좋은 영향`을 줌
+- page1에서 2로 이동했을 때 3의 데이터를 미리 받아놓는 것
+
 ### React Query가 SWR보다 좋은 점
 1. Devtools : 데이터 흐름을 파악할 수 있음. SWR은 서드 파티 라이브러리를 이용해야 함
 2. 무한 스크롤 구현
@@ -220,7 +224,6 @@ queryClient.prefetchQueries(todoKeys.detail(id), () => fetchTodo(id))
 ```
 - 권장하는 방식
 - 유지보수에 용이
-
 
 
 ### `invalidateQueries`
