@@ -129,7 +129,7 @@ cd TIL
 
 #### 2.2. Node.js 설치
 
-- [Node.js](https://nodejs.org/ko/) 설치 (LTS 버전 권장)
+- [Node.js](https://nodejs.org/ko/) 설치 (v16.14 이상)
 
 #### 2.3. yarn 설치
 
