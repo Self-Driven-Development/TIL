@@ -32,6 +32,14 @@ ab+a'c = (a+c)(a'+b)
 
 :::
 
+찾은 몇개의 패턴들   
+- 하나만 다르면 complement 소거
+- 두개 다르면 특별히 할 거 없음
+- 3개, 2개 있을때 하나가 같다면 소거가능(다른 놈 소거)
+- 4개 짜리 감는 법: 둘로 묶든 하나로 묶든, 그 이후 ab+a'c = (a+c)(a'+b)를 사용해 한번 더 분리 해야함   
+  ab(c+d)꼴이나 c(a+b)(d+e)꼴은 안됨(3-input AND는 해결할 수 없음). 중요포인트: 2개 항만으로는 해결 불가능
+  3항 묶기스킬도 존재
+
 ### Karnaugh Map
 
 letter는 상수혹은 변수, literal은 보수까지 포함
@@ -52,7 +60,7 @@ minimum SOP 는 AND-OR 형식이다. Bubble pushing을 통해 NAND-NAND 게이�
 
 이때 구한 SOP는 F'으로, 드모르간을 취해주면 F를 구할 수 있고 이는 minimum POS이다
 
-이들을 Maxterm이고, AND-OR gate이다. Bubble pushing을 통해 NOR-NOR게이트로 변환한다
+이들을 Maxterm이고, OR-AND gate이다. Bubble pushing을 통해 NOR-NOR게이트로 변환한다
 
 Implicant : 2^k의 묶음
 
@@ -68,6 +76,7 @@ don't care : 0으로 봐도되고 1로 봐도되는 항. 있을때 카르노맵�
 
 꼭지점, X가 포함되었을때 위아래 시야 넓게 가지기
 ![Alt text ](../assets/IMG_2760.jpeg)
+don't care와 같이 묶을 때 solution들의 literal의 총합은 같다
 
 input으로 보수가 허용된다면, a+b는 (a'b')'인 NAND게이트가 된다
 
@@ -88,9 +97,10 @@ carry look ahead adder(CLA) carry를 미리 예측한다
 
 :::note
 
+연산시 C, X, Y, P, G는 같은레벨에서 시작이다   
 carry generater(G) = A&B  
 carry propogate(P) = A^B  
-C_i+1 = C_i&P+G
+C_i+1 = C_i&P_i+G_i
 
 4bit씩 묶여있을때, P,G를 계산하는데 1delay(이하 gate delay를 의미),  
 C(i,i+3)계산하는데 2delay,  
@@ -108,3 +118,8 @@ S_9를 구한다면, 1+2+2+2(C9를 구해야함)+1 = 8
 S_9든, S_6이든 1+2+2+2(C_i를 통해 C(i+1,i+3)을 구함)+1이 걸린다
 
 :::
+
+subtracter   
+따로 subtracter를 구현 할 수도 있지만, 보수법을 이용하여 해결한다   
+1과 xor연산을 하면 1의 보수가 처리된다는 것과 거기에 1이 더해지면 2의 보수가 된다는 것을 생각하여   
+C_0를 1로 설정하고,  X_0과 Y_0을 연산할 때 넣어주고 C_0을 마스크로 xor 연산을 시키면 adder/subtracter를 동시에 해결하는 게이트가 완성된다   

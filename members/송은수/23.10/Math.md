@@ -16,9 +16,10 @@ r < m & (d_r+1 != 0) => no solution
 r = m | (r < m & 이하 0행 ) => has solution  
 그 중 r = n 이라면 unique solution
 
-subset이 vector space의 subspace임을 증명하기 위해선 요소 두개를 뽑고, A+kB 꼴로 대입, 다시 A와 k(B)꼴로 묶어 그대로 성립함을 증명  
-nonhomogeneous case의 해집합은 no solution(vector space X)이다  
-homoheneous case의 해집합은 000만 가지거나, 무수히 많거나
+subset이 vector space의 subspace임을 증명하기 위해선 요소 두개를 뽑고, A+kB 꼴로 대입, 다시 A와 k(B)꼴로 묶어 그대로 성립함을 증명   
+vector space의 subspace를 밝힐때 vector space에 포커스되는게 아니라, subspace에 포커스되어 덧셈, 실수배에 닫혀있는지 확인해야한다   
+nonhomogeneous case의 해집합은 vector space X 이다  
+homoheneous case의 해집합은 000만 가지거나, 무수히 많거나. 이들은 vector space 이다
 
 2차원에서 한 쪽 공간만 포함하거나, positive 혹은 negative만 포함하는 subset이라면 실수배를 취하면 subset을 벗어나므로 subspace가 될 수 없다
 

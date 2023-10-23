@@ -57,3 +57,40 @@ const css_class = css``;
 컴포넌트의 return 문 내에서 js코드를 쓸 수 있는 것처럼, context API를 통해 변수를 전역적으로 사용할 수 있는 것처럼  
 css도 변수를 만들어 저장해놓고 필요할 떄 전역적으로 사용할 수 있다.  
 Theme을 활용하는데
+
+## Emotion Babel 설정
+cra에서 emotion을 사용하려면 `/** @jsx jsx */` pragma 필요, 이를 해결하기 위해 typescript 컴파일러 옵션에 `"jsxImportSource": "@emotion/react"`를 추가해줘서 해결할 수 있다. 그럼에도 cra 4버전 이상부터는 에러가 떠서 `/** @jsxImportSource @emotion/react */`를 써줘야 한다   
+매 코드마다 상단에 이걸 쓰기는 귀찮으니 커스터마이징 해준다
+
+::: note
+
+babel이란? 구/신버전의 문법차이로 인한 오류를 해결해줌. 신버전에 작성된 코드를 구버전에서 실행할때 호환가능한 옛 버전으로 돌려줌   
+혹은 nodeJS에서 실행되지 않는, cra에서만 사용하는 import문 등을 실행가능하게 바꿔줌
+
+nodeJS란? JS엔진은 브라우저마다 다르다. nodeJS는 V8엔진을 기반으로 작동하는 서버사이드 런타임이다.   
+리액트는 라이브러리로써, 여러가지 모듈들을 가져와 사용한다.   
+이러한 모듈들은 node_modules에 있고, 버전관리는 config.json에서 이루어진다.   
+config.json은 이뿐만 아니라 매크로 설정기능도 있다.   
+cra는 리액트에 필요한 모듈,라이브러리,웹팩,바벨들을 모아 한꺼번에 설치할 수 있게 도와준다.   
+
+eject? npm run eject를 하면 숨겨져있는 파일들이 전부 나온다.   
+cra로 one build dependency를 가지고 있던 파일들을 커스터마이징 할 수 있는 동시에, 사용자가 계속 유지보수를 해줘야하는 상태가 되는 것이다.   
+url('https://velog.io/@remon/React-Eject%EB%9E%80-npm-run-eject')
+
+:::
+
+무엇을 커스터마이징 할까? eject는 커스터마이징은 가능하나 다시 되돌아 올 수 없으므로, react-app-rewird, customize-cra를 사용한다   
+이를 통해 웹팩, 바벨을 수정해 pragma없이도 emotion이 적용되도록 설정한다.
+
+### Storybook
+확장성있는 컴포넌트를 만들다 보니, 모든 경우의 수를 직접 확인하는데는 어려움이 있었다. 예를들어 버튼의 변수로 크기, 색, 아이콘 등이 들어가는데 이러한 것들이 문제가 없는지 전부 띄워보는 것은 쉽지 않은 작업이였다.
+
+이를 해결하기 위한 방법으로 storybook이 있었다. storybook은 독립된 환경에서 해당 컴포넌트를 독립적으로 실행하여 변수들을 체크하기 쉽게 도와주었다.
+
+url('https://velog.io/@mrbartrns/%EC%9E%AC%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5%ED%95%9C-%EB%B2%84%ED%8A%BC-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%A7%8C%EB%93%A4%EA%B8%B0-React')
+
+`.stories/`안에 `./*.tsx`, `./*.stories.tsx`를 만들면 `./*.stories.tsx`가 storybook의 환경에서 실행된다
+
+다만 emotion과 같이 사용하는데 시행착오가 있었다. 변경한 babel및 웹팩이 cra에만 작용하지 storybook의 웹팩에는 적용되지 않았다
+
+이를 해결하기 위해 cra를 수정하기 위해 사용했던 `config-overrides.js`를 `.storybook/main.ts`에 가져와 웹팩수정을 하여 해결해였다.   
