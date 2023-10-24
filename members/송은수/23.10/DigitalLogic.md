@@ -6,11 +6,32 @@ title: '디지털회로개론'
 
 ## digital system
 
+### BCD
+
+BCD코드는 4bit로 이루어진다. 일반적인 8421BCD사용 시, 9를 초과하면 6(0110)울 더해줘 다음 자리로 넘긴다
 Inverter의 cost = 2
+
+conversion(13 to 1101) != coding(13 to 0001|0011)
+
+### Hamming Code
+
+7비트 기준, 4개의 data bit, 3개의 check bit로 이루어져 1bit의 오류가 발생시 검출할 수 있다(2 bit이상 불가능)
+
+n개의 check bit에 따라 2^n - n - 1 만큼의 data bit를 가질 수 있다
+
+check bit의 위치는 2의 제곱승(1,2,4)체크 비트는 357, 367, 567이다   
+
+검출 시 자기 자신까지 포함해서 e_n 측정, 4e_4 + 2e_2 + e_1 자리에서 오류가 났음을 확인한다
+
+
+
+## combinational system
 
 Driver = Inverter + Inverter
 
 NOR, NAND, NXOR에 Inverter를 부텨 OR, AND, XOR가 만들어진다. 시간cost 역시 각각 +2가 된다.
+
+Inverter = 2, NAND, NOR = 4, XNOR = 12
 
 0+a = a, 1\*a = a Identity
 
@@ -21,6 +42,8 @@ a+a = a, a\*a = a Idempotency
 a+bc = (a+b)(a+c) distributive
 
 a+ab = a absorption
+
+드모르간 정의 하는 방법은 a + a' = 1, a*a' = 0 임을 증명
 
 :::note
 
