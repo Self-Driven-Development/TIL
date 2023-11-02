@@ -166,6 +166,12 @@ input에 비밀번호 보였다 안보였다 아이콘을 추가해 작업을 �
 
 url(`https://fe-developers.kakaoent.com/2022/220609-storybookwise-component-refactoring/`)
 
+# 스토리북에서 컴파운드 컴포넌트 사용시도
+
+스토리북에서 컴파운드 컴포넌트를 실행하고 싶었으나 아무리해도 모르겠어서 포기.
+
+컴파운드 컴포넌트도 못만드는데 복합적인 컴포넌트는 만들 수 있으련지 모르겠다.
+
 # svg, webpack
 
 매번 svg를 가져오면 component의 가독성이 좋지 않을거 같아 컴포넌트처럼 사용하는 방법을 찾고자 했다
@@ -197,6 +203,12 @@ declare module '*.svg' {
 
 그러나.. 웹팩을 조작하는 여러가지 방법을 찾아봤으나 내 프로젝트에서는 적용이 안돼서 그냥 불편해도 저렇게 쓰기로 결정!..ㅎㅎ
 
+### 불러와서 색 변경
+
+컴포넌트처럼 사용하거나 함수처럼 사용하려면 .svg 파일 내에서 매개변수를 설정하는 등의 작업이 필요할 것 같았으나, 필요하지 않았다
+
+호출하는 곳에서 색을 적절히 조절하기 위해선 변경을 원하는 색상을 `<SearchSvg style={{ color: 'red' }}/>`style로 지정해주고 .svg 파일내에서 변경대상 요소들을 `currentColor`로 설정해준다.
+
 # eslint 오류
 
 몇 번 eslint오류를 경험했다. 그럼에도 나는 이게 eslint오류인지 모르고 삽질을 했다.
@@ -204,3 +216,87 @@ declare module '*.svg' {
 eslint오류는 오류에 마우스를 가져다 대보면 eslint오류라고 나오고, 친절히 fix하는 방법까지 알려준다
 
 다음부터는 무슨오류인지 먼저 잘 읽어보고 직접 오류를 해결하기 위해 노력해보자.
+
+# flex 정복하기
+
+봐도봐도 헷갈리는 flex. 아직도 헷갈리는 부분 한번 더 정리해보기
+
+## flex-basis
+
+flex박스가 차지하는 디폴트공간크기. 기본값은 `auto`로 영역이 차지하는 공간. 고정공간이 아니라 최소공간의 크기
+
+### width와 다른점은?
+
+width는 크기가 고정되지만, basis는 더 큰 것들은 유동적으로 커진다.
+
+## flex-grow
+
+flex박스의 유연성 결정. 기본값 `0`은 고정, 1로 변경시 유동적 확장
+
+주로 독립된 flex박스에 사용
+
+container에 정의하면 자식 모두 설정
+
+### basis는 제외한다
+각 flex박스의 grow의 비율이 1:2:1이라면 해당하는 공간만큼의 공간을 나눠가지면서 확장되는데,   
+이 공간은 basis크기는 제외한 공간이다. 즉, 각 flex박스가 100px의 basis공간을 차지한다면 300px공간을 제외한 공간을 나눠가진다.
+
+전체공간을 나눠갖고 싶다면 basis를 0으로 만들어주면 된다.
+
+## flex-shrink
+
+flex박스의 유연성 결정. 기본값 `1`은 크기가 작아질 때 착아지나, 0으로 변경시 고정
+
+## flex
+
+`flex: grow shrink basis` 형식으로 사용되어 grow, shrink, basis 값을 동시에 설정
+
+아무것도 입력하지 않으면 auto가 아니라 0이 설정되는 등 부정확한 동작을 하니 정확한 입력 필요
+
+container에 적용하면 자식에 전부 적용
+
+## align-self
+
+align-items는 container에 적용하나, align-self는 개별적인 flex박스에 적용할 수 있어 하나의 flex박스만 위치변경 가능
+
+# CSSTransition
+
+어느정도 애니메이션 효과가 필요할 것 같아서 cssTransition을 도입했다
+
+`"react-transition-group", "@types/react-transition-group"` @types 역시 필요했다.
+
+modal에 도입하고자 해서 기존코드에 `<CSSTransition ... ></CSSTransition>`만 추가했더니 정상적으로 동작하지 않았다.
+
+원인은 JS코드를 거치고 난 이후의 코드를 CSSTransition에 적용한거라, `in`props에 적용되는 `isOpen`이 무조건 참만 적용되는 것이였다.
+
+기존 JS코드를 csstransition으로 변경하니 정상적으로 실행되었다. 
+
+### classNames
+cssTransition에 적용되는 코드는 classNames에 있는 style로 적용된다. 이 코드는 `CSS in CSS`라 `CSS in JS`로 바꿀 수 있는 방법을 찾아보았다.
+
+```ts
+classNames={modalStyles.transitionClassNames}
+
+const modalStyles = {
+  transitionClassNames: 'modal',
+  enter: css`
+    opacity: 0;
+  `,
+  enterActive: css`
+    opacity: 1;
+    transition:
+      opacity 300ms,
+      transform 300ms;
+  `,
+  exit: css`
+    opacity: 1;
+  `,
+  exitActive: css`
+    opacity: 0;
+    transition:
+      opacity 300ms,
+      transform 300ms;
+  `,
+}
+```
+객체 형식으로 선언 후, 
