@@ -344,4 +344,16 @@ while문이 끝나지 않는 한 다음문장으로 넘어갈 수 없으므로, 
 # navigate 순서
 `navigate(-1)`이 가끔은 엉뚱한 데로 갈 수 있다. required를 통해 대체 가능하다.
 
+# 함수 호출
+```ts
+const friendFindHandler1 = () => {
+    console.log('name')
+  }
+const friendFindHandler2 = (name: string) => {
+    console.log(name)
+  }
+onClick={friendFindHandler1}
+onClick={() => friendFindHandler2('name')}
+```
+말로 설명하기는 힘든데, 잘 구분해서 사용해야 한다.
 
