@@ -67,3 +67,10 @@ settimeoout을 통해 비동기 처리하니 정상적으로 동작했다.
 
 useLayoutEffect, ref, querySelector같은 방법을 써봤지만 전부 먹히지 않았다. 이유는 잘 모르겠다.
 
+
+# 친구창의 구성..?
+
+LOGIN_Friends라는 것은 실제로 존재하지 않고, 등록된 USERS중에서, 로그인 한 USER와의 친추관계를 알 수 있어야돼.
+
+친구배열을 만들어서.. CRUD 관리를 해야겠는데?
+
